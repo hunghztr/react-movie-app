@@ -1,10 +1,14 @@
-
+import FeatureMovie from "./components/FeatureMovie";
+import Header from "./components/Header";
 
 function App() {
-
   return (
-    <div className="bg-slate-600">helllo vite</div>
-  )
+    <div>
+      <Header />
+      <FeatureMovie />
+      
+    </div>
+  );
 }
 
-export default App
+export default App;
