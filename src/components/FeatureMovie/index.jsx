@@ -13,7 +13,7 @@ const FeatureMovie = () => {
     headers: {
       accept: "application/json",
       Authorization:
-        "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJmOGU4M2RkNDQxNTRiNGE3YWJmMzA4NzEwN2UxNWMyNCIsIm5iZiI6MTc0ODc0NjIyNC4yODEsInN1YiI6IjY4M2JiZmYwNmYyY2Q0NWY4NjdiYTQxMyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.HfEX9sxnaRFZ80DMhf1CKW51RQBRp1LIkjkUHBxlgkw",
+        `Bearer ${import.meta.env.VITE_API_TOKEN}`,
     },
   }).then( async (res) => {
     const data = await res.json()
