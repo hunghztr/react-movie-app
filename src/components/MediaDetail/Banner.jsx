@@ -1,7 +1,10 @@
 import CircularProgressBar from "../CircularrogressBar";
+import ImageComponent from "../Image";
 const Banner = ({mediaInfo,certificate,groupByCrews}) => {
   return (
     <div className="relative text-white overflow-hidden shadow-sm shadow-slate-800">
+      <ImageComponent  src={`https://image.tmdb.org/t/p/original/${mediaInfo?.backdrop_path}`}
+        className="absolute inset-0 brightness-[.2]" />
       <img
         className="absolute inset-0 brightness-[.2]"
         src={`https://image.tmdb.org/t/p/original/${mediaInfo?.backdrop_path}`}
@@ -9,11 +12,8 @@ const Banner = ({mediaInfo,certificate,groupByCrews}) => {
       />
       <div className="flex relative max-w-screen-xl mx-auto px-6 py-8 gap-6 lg:gap-8">
         <div className="flex-1">
-          <img
-            className="flex-1"
-            src={`https://media.themoviedb.org/t/p/w600_and_h900_bestv2/${mediaInfo?.poster_path}`}
-            alt=""
-          />
+          <ImageComponent src={`https://media.themoviedb.org/t/p/w600_and_h900_bestv2/${mediaInfo?.poster_path}`}
+          width={600} height={900} className='rounded-lg w-full' />
         </div>
         <div className="flex-[2] text-[1.2vw]">
           <p className="font-bold mb-2 text-[2vw]">{mediaInfo?.title}</p>

@@ -1,29 +1,34 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import MovieCard from "../MovieCard";
+import useFetch from "../../hooks/useFetch";
 
 
 const MediaList = ({ title, tabs }) => {
-  const [mediaList, setMediaList] = useState([]);
+  console.log({tabs})
   const [activeTabId, setActiveTabId] = useState(tabs[0]?.id);
-
-  useEffect(() => {
-    const url = tabs.find((i) => activeTabId === i.id)?.url;
-    if (url) {
-      fetch(url, {
-        method: "GET",
-        headers: {
-          accept: "application/json",
-          Authorization:
-            `Bearer ${import.meta.env.VITE_API_TOKEN}`,
-        },
-      }).then(async (res) => {
-        const data = await res.json();
-        console.log(data.results);
-        const trendingMovies = data.results.slice(0, 12);
-        setMediaList(trendingMovies);
-      });
-    }
-  }, [activeTabId,tabs]);
+  const {data:response} = useFetch ({
+    url:tabs.find((i) => activeTabId === i.id)?.url
+  })
+  const mediaList = (response.results||[]).slice(0,12)
+  console.log(mediaList)
+  // useEffect(() => {
+  //   const url = tabs.find((i) => activeTabId === i.id)?.url;
+  //   if (url) {
+  //     fetch(url, {
+  //       method: "GET",
+  //       headers: {
+  //         accept: "application/json",
+  //         Authorization:
+  //           `Bearer ${import.meta.env.VITE_API_TOKEN}`,
+  //       },
+  //     }).then(async (res) => {
+  //       const data = await res.json();
+  //       console.log(data.results);
+  //       const trendingMovies = data.results.slice(0, 12);
+  //       setMediaList(trendingMovies);
+  //     });
+  //   }
+  // }, [activeTabId,tabs]);
   return (
     <div className="px-8 text-[1.2vw] py-10 bg-black text-white">
       <div className="flex items-center gap-4 mb-6">

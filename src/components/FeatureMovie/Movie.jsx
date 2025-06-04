@@ -1,9 +1,12 @@
+import ImageComponent from "../Image"
 const Movie = ({data}) => {
 
 
   return (
-    <div><img className="w-full aspect-video brightness-50" 
-    src={`https://image.tmdb.org/t/p/original${data.backdrop_path}`} />
+    <div>
+      <ImageComponent src={`https://image.tmdb.org/t/p/original${data.backdrop_path}`}
+       className="w-full aspect-video brightness-50" width={900} height={500} />
+     
         <div className="text-white absolute bottom-[10%] left-8 w-1/2 sm:w-1/3">
           <p className="font-bold sm:text-[2vw] mb-2">{data.title}</p>
           <div>
