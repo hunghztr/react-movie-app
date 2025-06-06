@@ -12,7 +12,7 @@ const MovieDetail = () => {
   const { id } = useParams();
  
   const {loading,data:movieInfo} = useFetch({
-    url:`/movie/${id}?append_to_response=release_dates,credits`
+    url:`/movie/${id}?append_to_response=release_dates,credits,videos`
   })
   const {data:rcmResponse,relatedLoading} = useFetch({
     url:`/movie/${id}/recommendations`
@@ -33,12 +33,19 @@ const MovieDetail = () => {
   return (
     <div>
       <Banner
-        mediaInfo={movieInfo}
+        title={movieInfo?.title}
+        backdrop_path={movieInfo?.backdrop_path}
+        poster_path={movieInfo?.poster_path}
+        release_date={movieInfo?.release_date}
+        genres={movieInfo?.genres}
+        point={movieInfo?.vote_average}
+        overview={movieInfo?.overview}
         certificate={certificate}
         groupByCrews={groupByCrews}
+        trailer={movieInfo?.videos?.results?.find(i => i.type === 'Trailer')?.key}
       />
       <div className="bg-black text-white text-[1.2vw]">
-        <div className="flex mx-auto max-w-screen-xl px-6 py-10 gap-6 sm:gap-8">
+        <div className="container">
           <div className="flex-[2]">
             <ActorList actors={(movieInfo?.credits?.cast || [])}/>
             <RelatedMediaList  mediaList={relatedMovie} loading={relatedLoading}/>

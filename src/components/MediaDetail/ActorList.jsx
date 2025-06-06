@@ -17,6 +17,7 @@ const ActorList = ({actors = []}) => {
                 name={i.name}
                 character={i.character}
                 profilePath={i.profile_path}
+                episode_count = {i.episode}
               />
             )
           })

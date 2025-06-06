@@ -1,6 +1,8 @@
+import { Link } from "react-router-dom"
+import { useModalContext } from "../../context/ModalProvider"
 import ImageComponent from "../Image"
-const Movie = ({data}) => {
-
+const Movie = ({data,trailer}) => {
+  const {popup} = useModalContext()
 
   return (
     <div>
@@ -21,7 +23,13 @@ const Movie = ({data}) => {
             </p>
             </div>
             <div className="flex mt-4 gap-2">
-              <button className="flex bg-white text-black py-2 px-4 rounded text-[10px] lg:text-lg">
+              <button
+              onClick={() => {
+               popup(<iframe title='trailer'
+               src={`https://www.youtube.com/embed/${trailer}`} 
+               className='w-[50vw] aspect-video' />)
+              }}
+               className="flex bg-white text-black py-2 px-4 rounded text-[10px] lg:text-lg">
                 <svg
                   className="w-6"
                   data-slot="icon"
@@ -39,7 +47,9 @@ const Movie = ({data}) => {
                   ></path>
                 </svg>Trailer
               </button>
+              <Link to={`/movie/${data.id}`}>
               <button className="flex bg-slate-300/35 py-2 px-4 rounded text-[10px] lg:text-lg">View Detail</button>
+              </Link>
             </div>
           </div>
         </div></div>

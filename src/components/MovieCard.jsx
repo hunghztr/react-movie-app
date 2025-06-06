@@ -3,7 +3,7 @@ import CircularrogressBar from "./CircularrogressBar"
 import ImageComponent from "./Image"
 const MovieCard = ({title,releaseDate,poster,point,mediaType,id}) => {
   return (
-    <Link to={`/movie/${id}`} className="border border-slate-800 rounded-lg">
+    <Link to={`/${mediaType}/${id}`} className="border border-slate-800 rounded-lg">
     <div className="relative">
       {
         mediaType === 'tv' &&

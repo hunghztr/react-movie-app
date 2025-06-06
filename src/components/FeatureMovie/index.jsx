@@ -7,8 +7,12 @@ import useFetch from "../../hooks/useFetch";
 const FeatureMovie = () => {
   const [activeMovieId, setActiveMovieId] = useState();
   const { data: popular } = useFetch({
-    url: "/movie/popular",
+    url: "/discover/movie?include_adult=false&language=en-US&page=1&sort_by=popularity.desc&include_video=true",
   });
+  const {data: videoRes}  = useFetch({
+    url: `/movie/${activeMovieId}/videos`
+  },{enabled: !! activeMovieId})
+
   const movies = (popular.results || []).slice(0, 4);
   useEffect(() => {
     setActiveMovieId(movies[0]?.id);
@@ -19,7 +23,8 @@ const FeatureMovie = () => {
       {movies
         .filter((i) => i.id === activeMovieId)
         .map((i) => (
-          <Movie key={i.id} data={i} />
+          <Movie key={i.id} data={i} 
+          trailer={videoRes?.results?.find(i => i.type === 'Trailer' && i.site === 'YouTube')?.key} />
         ))}
       <PaginateIndicator
         movies={movies}

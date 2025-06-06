@@ -5,11 +5,12 @@ const DEFAULT_HEADERS={
           Authorization:
             `Bearer ${import.meta.env.VITE_API_TOKEN}`,
 }
-export default function useFetch({url='',method='GET',headers={}}){
+export default function useFetch({url='',method='GET',headers={}},{enabled} = {enabled:true}){
   const [data,setData] = useState({});
   const [loading,setLoading] = useState(false)
   useEffect(() => {
-    setLoading(true);
+    if(enabled){
+      setLoading(true);
     fetch(
       `${import.meta.env.VITE_API_HOST}${url}`,
       {
@@ -24,12 +25,12 @@ export default function useFetch({url='',method='GET',headers={}}){
         const data = await res.json();
         setData(data)
       })
-      .catch((error) => {
-        console.error("Error fetching movie details:", error);
-      })
+      
       .finally(() => {
         setLoading(false);
       });
-  }, [url,method,JSON.stringify(headers)]);
+    }
+    
+  }, [url,method,JSON.stringify(headers),enabled]);
   return {loading,data}
 }
