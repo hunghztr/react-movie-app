@@ -7,6 +7,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import RootLayout from "./pages/RootLayout.jsx";
 // import TVShowDetail from "./pages/TVShowDetail.jsx";
 import ModalProvider from "./context/ModalProvider.jsx";
+import SearchPage from "./pages/SearchPage.jsx";
 // import PeoplePage from "./pages/PeoplePage.jsx";
 
 const MovieDetail = lazy(() => import("./pages/MovieDetail.jsx"))
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
       {
         path: '/people/:id',
         element: <PeoplePage/>
+      },
+      {
+        path: '/search',
+        element: <SearchPage/>
       }
     ],
   },
